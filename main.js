@@ -2,14 +2,13 @@ let form = document.getElementById('addForm');
 let itemList = document.getElementById('items');
 let filter = document.getElementById('filter');
 
-
 // form submit event
-form.addEventListener('submit', addItem);
-
+form.addEventListener('submit', addItem, );
 // delete event
 itemList.addEventListener('click', removeItem);
 // filter event
 filter.addEventListener('keyup', filterItems);
+
 
 function removeItem(e) {
     if(e.target.classList.contains('delete')){
@@ -20,18 +19,27 @@ function removeItem(e) {
     }
 }
 
+function addItemDescription(e){
+    e.preventDefault();
+
+    let newItemDescription = document.getElementById('itemDescription').value;
+    let li = document.createElement('li');
+    li.className = 'list-group-item';
+    li.appendChild(document.createTextNode(newItemDescription));
+}
 function addItem(e) {
     e.preventDefault();
 
     //get input value
     let newItem = document.getElementById('item').value;
+    let description = document.getElementById('description').value;
     // create new element 
     let li = document.createElement('li');
     // add class 
     li.className = 'list-group-item';
     // add text node with input value
     li.appendChild(document.createTextNode(newItem));
-    
+    li.appendChild(document.createTextNode(' '+description));
     // create delete btn
     let deleteBtn = document.createElement('button');
     // add class
@@ -43,6 +51,7 @@ function addItem(e) {
     // append li to Lister
     itemList.appendChild(li);
 }
+
 
 // filter item 
 function filterItems(e) {
