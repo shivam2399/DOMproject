@@ -1,11 +1,15 @@
 let form = document.getElementById('addForm');
 let itemList = document.getElementById('items');
+let filter = document.getElementById('filter');
+
 
 // form submit event
 form.addEventListener('submit', addItem);
 
 // delete event
 itemList.addEventListener('click', removeItem);
+// filter event
+filter.addEventListener('keyup', filterItems);
 
 function removeItem(e) {
     if(e.target.classList.contains('delete')){
@@ -38,4 +42,22 @@ function addItem(e) {
     li.appendChild(deleteBtn);
     // append li to Lister
     itemList.appendChild(li);
+}
+
+// filter item 
+function filterItems(e) {
+    // convert txt to lowercase
+    let text = e.target.value.toLowerCase();
+    // get li
+    let items = itemList.getElementsByTagName('li');
+    // conv to array
+    Array.from(items).forEach(function(item){
+        let itemName = item.firstChild.textContent;
+        if(itemName.toLowerCase().indexOf(text) != -1){
+            item.style.display = 'block';
+        }
+        else {
+            item.style.display = 'none';
+        }
+    });
 }
