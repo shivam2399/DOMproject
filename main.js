@@ -62,7 +62,8 @@ function filterItems(e) {
     // conv to array
     Array.from(items).forEach(function(item){
         let itemName = item.firstChild.textContent;
-        if(itemName.toLowerCase().indexOf(text) != -1){
+        let description = item.childNodes[1].textContent;
+        if(itemName.toLowerCase().indexOf(text) != -1 || description.toLowerCase().indexOf(text) != -1){
             item.style.display = 'block';
         }
         else {
